@@ -62,6 +62,14 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogoHeight('3rem')
             ->favicon(asset('images/book.png'))
             ->sidebarFullyCollapsibleOnDesktop()
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('Library Management'),
+                NavigationGroup::make()
+                    ->label('Borrowing Management'),
+                NavigationGroup::make()
+                    ->label('Administration'),
+            ]);
             ;
     }
 }

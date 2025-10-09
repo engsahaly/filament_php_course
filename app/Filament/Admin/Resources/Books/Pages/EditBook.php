@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Admin\Resources\Categories\Pages;
+namespace App\Filament\Admin\Resources\Books\Pages;
 
-use App\Filament\Admin\Resources\Categories\CategoryResource;
+use App\Filament\Admin\Resources\Books\BookResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 
-class EditCategory extends EditRecord
+class EditBook extends EditRecord
 {
-    protected static string $resource = CategoryResource::class;
+    protected static string $resource = BookResource::class;
 
     protected function getHeaderActions(): array
     {

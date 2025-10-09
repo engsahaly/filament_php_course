@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Resources\Categories\Tables;
+namespace App\Filament\Admin\Resources\Borrowings\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -9,14 +9,23 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class CategoriesTable
+class BorrowingsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->searchable(),
+                TextColumn::make('borrower_id')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('book_id')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('borrowed_at')
+                    ->dateTime()
+                    ->sortable(),
+                TextColumn::make('status')
+                    ->badge(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

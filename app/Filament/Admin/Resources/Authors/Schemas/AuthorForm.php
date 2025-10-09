@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Filament\Admin\Resources\Categories\Schemas;
+namespace App\Filament\Admin\Resources\Authors\Schemas;
 
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
 
-class CategoryForm
+class AuthorForm
 {
     public static function configure(Schema $schema): Schema
     {
@@ -13,6 +14,8 @@ class CategoryForm
             ->components([
                 TextInput::make('name')
                     ->required(),
+                Textarea::make('bio')
+                    ->columnSpanFull(),
             ]);
     }
 }

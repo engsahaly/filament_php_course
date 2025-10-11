@@ -24,6 +24,7 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        // dd(get_class_methods($panel));
         return $panel
             ->default()
             ->id('admin')
@@ -69,7 +70,8 @@ class AdminPanelProvider extends PanelProvider
                     ->label('Borrowing Management'),
                 NavigationGroup::make()
                     ->label('Administration'),
-            ]);
+            ])
+            ->resourceCreatePageRedirect('index')
             ;
     }
 }

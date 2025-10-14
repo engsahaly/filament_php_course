@@ -16,4 +16,11 @@ class ViewCategory extends ViewRecord
             EditAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $data['name'] = 'custom modification for ' . $data['name'];
+
+        return $data;
+    }
 }

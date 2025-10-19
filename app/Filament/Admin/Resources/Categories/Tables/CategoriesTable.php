@@ -23,8 +23,6 @@ class CategoriesTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('status')
-                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -35,20 +33,16 @@ class CategoriesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                TrashedFilter::make(),
+                //
             ])
             ->recordActions([
-                // ViewAction::make(),
-                // EditAction::make(),
+                ViewAction::make(),
+                EditAction::make(),
                 DeleteAction::make(),
-                ForceDeleteAction::make(),
-                RestoreAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
-                    ForceDeleteBulkAction::make(),
-                    RestoreBulkAction::make(),
                 ]),
             ]);
     }

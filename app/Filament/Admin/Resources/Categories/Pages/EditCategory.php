@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\Categories\Pages;
 
+use Illuminate\Support\Str;
 use Filament\Actions\ViewAction;
 use Filament\Actions\DeleteAction;
 use Filament\Support\Icons\Heroicon;
@@ -21,29 +22,11 @@ class EditCategory extends EditRecord
         ];
     }
 
-    // protected function mutateFormDataBeforeFill(array $data): array
-    // {
-    //     $data['name'] = 'custom modificxation for ' . $data['name'];
-    //     return $data;
-    // }
-
-    // protected function mutateFormDataBeforeSave(array $data): array
-    // {
-    //     $data['name'] = 'custom modificxation for ' . $data['name'];
-    //     return $data;
-    // }
-
-    // protected function getSavedNotificationTitle(): ?string
-    // {
-    //     return 'Category Updated';
-    // }
-    
-    protected function getSavedNotification(): ?Notification
+    protected function mutateFormDataBeforeSave(array $data): array
     {
-        return Notification::make()
-            ->success()
-            ->title('Category updated')
-            ->body('Category ' . $this->record->name . ' updated')
-            ->icon(Heroicon::AcademicCap);
+        $data['slug'] = Str::slug($data['name'], '-') . '-' . Str::random(5);
+
+        return $data;
     }
+
 }

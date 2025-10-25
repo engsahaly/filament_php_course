@@ -21,6 +21,10 @@ class BorrowingForm
                 Select::make('status')
                     ->options(['borrowed' => 'Borrowed', 'returned' => 'Returned'])
                     ->default('borrowed'),
+            ])
+            ->columns([
+                'sm' => 2,
+                'lg' => 3,
             ]);
     }
 }

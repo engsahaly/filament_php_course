@@ -8,6 +8,7 @@ use Filament\Forms\Components\Select;
 use Filament\Schemas\Components\Icon;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\FusedGroup;
 use Filament\Schemas\Components\Utilities\Get;
 
 class CategoryForm
@@ -16,55 +17,21 @@ class CategoryForm
     {
         return $schema
             ->components([
-                TextInput::make('name')  
-                    // ->label('Category name')
-                    // ->hiddenLabel(function () {
-                    //     return 1 == 2;
-                    // })
-                    // hiddenLabel(false)
-                    // ->inlineLabel()
-                    // ->default('this is category name')
-                    // ->placeholder('this is category name')
-                    // ->prefix('https://')
-                    // ->suffix('.com')
-                    // ->autofocus(false)
-                    // ->disabled()
-                    // ->disabledOn('edit')
-                    // ->hidden()
-                    // ->hiddenOn('edit')
-                    // ->visible()
-                    // ->visibleOn()
-                    // ->belowErrorMessage([
-                    //     Icon::make(Heroicon::AcademicCap),
-                    //     'My custom message'
-                    // ])
-                    // ->markAsRequired(false)
-                    // ->required()
-                    // ->startsWith(['a'])
-                    // ->disabled(function (Get $get) {
-                    //     return $get('status') === 'published';
-                    // })
-                    // ->label(function (?Model $record) {
-                    //     return $record?->name . ' Name';
-                    // })
-                    // ->belowContent(function ($state) {
-                    //     return $state == 'mahmoud' ? 'This is not allowed name' : '';
-                    // })
-                    // ->live()
-                    // ->disabledOn('edit')
-                    ->disabled(function (string $operation) {
-                        return $operation == 'create';
-                    })
-                    ,
+
+                FusedGroup::make([
+                    TextInput::make('name')
+                        ->placeholder('Category Name'),
+                    Select::make('status')  
+                        ->options([
+                            'draft' => 'Draft',
+                            'reviewing' => 'Reviewing',
+                            'published' => 'Published',
+                        ]),
+                ])
+                ->label('Category Details')
+                ->columnSpanFull()
+                ->columns(2),
                 
-                Select::make('status')  
-                    ->options([
-                        'draft' => 'Draft',
-                        'reviewing' => 'Reviewing',
-                        'published' => 'Published',
-                    ])
-                    ->live()
-                    ->required(),
             ]);
     }
 }

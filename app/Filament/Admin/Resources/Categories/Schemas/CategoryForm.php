@@ -18,19 +18,12 @@ class CategoryForm
         return $schema
             ->components([
 
-                FusedGroup::make([
-                    TextInput::make('name')
-                        ->placeholder('Category Name'),
-                    Select::make('status')  
-                        ->options([
-                            'draft' => 'Draft',
-                            'reviewing' => 'Reviewing',
-                            'published' => 'Published',
-                        ]),
-                ])
-                ->label('Category Details')
-                ->columnSpanFull()
-                ->columns(2),
+                TextInput::make('name')
+                    ->placeholder('Category Name')
+                    ->required()
+                    ->label('Category Name')
+                    ->columnSpanFull()
+                    ,
                 
             ]);
     }

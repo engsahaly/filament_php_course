@@ -2,9 +2,10 @@
 
 namespace App\Filament\Admin\Resources\Borrowers\Schemas;
 
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Grid;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 
 class BorrowerForm
 {
@@ -12,14 +13,30 @@ class BorrowerForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
-                    ->required(),
-                TextInput::make('email')
-                    ->label('Email address')
-                    ->email(),
-                TextInput::make('phone')
-                    ->tel(),
+
+                Grid::make()
+                    ->schema([
+                        TextInput::make('name')
+                            ->placeholder('Borrower Name')
+                            ->required(),
+        
+                        TextInput::make('email')
+                            ->placeholder('Email Address')
+                            ->label('Email address')
+                            ->required()
+                            ->unique()
+                            ->email(),
+        
+                        TextInput::make('phone')
+                            ->placeholder('Phone Number')
+                            ->tel(),
+                    ])
+                    ->columns(3)
+                    ->columnSpanFull()
+                    ,
+
                 Textarea::make('address')
+                    ->placeholder('Address')
                     ->columnSpanFull(),
             ]);
     }

@@ -23,42 +23,40 @@ class BookForm
         return $schema
             ->components([
 
-                Wizard::make([
-                    Step::make('Book Info')
-                        ->schema([
-                            TextInput::make('title')
-                                ->required(),
-                            TextInput::make('isbn'),
-                        ])
-                        ->description('Book Information Details')
-                        ->icon(Heroicon::BookOpen)
-                        ->completedIcon(Heroicon::CheckCircle),
-
-                    Step::make('Publishing Info')
-                        ->schema([
-                            DatePicker::make('published_year'),
-                            TextInput::make('author_id')
-                                ->numeric(),
-                        ]),
-
-                    Step::make('Stock')
-                        ->schema([
-                            TextInput::make('total_copies')
-                                ->required()
-                                ->numeric()
-                                ->default(0),
-                            TextInput::make('available_copies')
-                                ->required()
-                                ->numeric()
-                                ->default(0),
-                        ]),
-                    ])
-                    ->skippable()
-                    ->startOnStep(2)
-                    ->columnSpanFull()
-                    ->columns(2),
+                TextInput::make('title')
+                    ->placeholder('Book Title')
+                    ->required()
+                    ,
 
 
+                TextInput::make('isbn')
+                    ->required()
+                    ->unique()
+                    ->placeholder('ISBN')
+                    ,
+
+                DatePicker::make('published_year')
+                    ->label('Published Date')
+                    ->placeholder('Published Date')
+                    ->native(false)
+                ,
+
+                TextInput::make('author_id')
+                    ->numeric(),
+
+                TextInput::make('total_copies')
+                    ->placeholder('Total Copies')
+                    ->required()
+                    ->numeric()
+                    ->rules(['min:1']),
+
+                TextInput::make('available_copies')
+                    ->placeholder('Available Copies')
+                    ->required()
+                    ->numeric()
+                    ->rules(['min:0']),
+
+            
                 
             ]);
     }

@@ -2,10 +2,11 @@
 
 namespace App\Filament\Admin\Resources\Borrowings\Schemas;
 
-use Filament\Forms\Components\DateTimePicker;
+use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+use Filament\Forms\Components\DateTimePicker;
 
 class BorrowingForm
 {
@@ -13,18 +14,26 @@ class BorrowingForm
     {
         return $schema
             ->components([
-                TextInput::make('borrower_id')
-                    ->numeric(),
-                TextInput::make('book_id')
-                    ->numeric(),
-                DateTimePicker::make('borrowed_at'),
-                Select::make('status')
-                    ->options(['borrowed' => 'Borrowed', 'returned' => 'Returned'])
-                    ->default('borrowed'),
-            ])
-            ->columns([
-                'sm' => 2,
-                'lg' => 3,
-            ]);
+
+                Section::make('Borrower & Book')
+                    ->schema([
+                        TextInput::make('borrower_id')
+                            ->numeric(),
+                        TextInput::make('book_id')
+                            ->numeric(),
+                    ]),
+
+                Section::make('Borrowing Details')
+                    ->schema([
+                        DateTimePicker::make('borrowed_at')
+                            ->placeholder('Borrowed Date')
+                            ->native(false),
+                        
+                        Select::make('status')
+                            ->options(['borrowed' => 'Borrowed', 'returned' => 'Returned'])
+                            ->default('borrowed')
+                            ->searchable(),
+                    ]),
+            ]);;
     }
 }

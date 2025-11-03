@@ -2,8 +2,9 @@
 
 namespace App\Filament\Admin\Resources\Categories\Schemas;
 
-use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+use Filament\Infolists\Components\TextEntry;
 
 class CategoryInfolist
 {
@@ -13,7 +14,8 @@ class CategoryInfolist
             ->components([
                 TextEntry::make('name'),
                 TextEntry::make('created_at')
-                    ->dateTime()
+                    ->since()
+                    // ->dateTime()
                     ->placeholder('-'),
                 TextEntry::make('updated_at')
                     ->dateTime()

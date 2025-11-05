@@ -14,7 +14,8 @@ class AuthorInfolist
                 TextEntry::make('name'),
                 TextEntry::make('bio')
                     ->placeholder('-')
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->markdown(),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

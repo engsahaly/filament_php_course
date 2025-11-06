@@ -7,12 +7,15 @@ use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Support\Enums\Width;
+use Filament\Actions\DeleteAction;
 use Filament\Tables\Filters\Filter;
+use Illuminate\Support\Facades\Log;
 use Filament\Forms\Components\Field;
 use Filament\Support\Icons\Heroicon;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Enums\PaginationMode;
@@ -26,6 +29,11 @@ class BooksTable
     {
         return $table
             ->columns([
+                
+
+
+
+
                 TextColumn::make('title')
                     ->label('Book Title')
                     // ->default('-')
@@ -52,38 +60,40 @@ class BooksTable
                     ,
 
                 // TextColumn::make('status'),
-                SelectColumn::make('status')
-                    ->options([
-                        'available' => 'available',
-                        'unavailable' => 'unavailable',
-                    ]),
+                // SelectColumn::make('status')
+                //     ->options([
+                //         'available' => 'available',
+                //         'unavailable' => 'unavailable',
+                //     ]),
 
 
 
-                TextColumn::make('isbn')
-                    ->searchable(),
-                TextColumn::make('published_year')
-                    ->date()
-                    ->sortable(),
-                TextColumn::make('total_copies')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('available_copies')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('author_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                // TextColumn::make('isbn')
+                //     ->searchable(),
+                // TextColumn::make('published_year')
+                //     ->date()
+                //     ->sortable(),
+                // TextColumn::make('total_copies')
+                //     ->numeric()
+                //     ->sortable(),
+                // TextColumn::make('available_copies')
+                //     ->numeric()
+                //     ->sortable(),
+                // TextColumn::make('author_id')
+                //     ->numeric()
+                //     ->sortable(),
+                // TextColumn::make('created_at')
+                //     ->dateTime()
+                //     ->sortable()
+                //     ->toggleable(),
+                // TextColumn::make('updated_at')
+                //     ->dateTime()
+                //     ->sortable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                
+
                 Filter::make('status')
                     ->query(fn (Builder $query): Builder => $query->where('status', 'available')),
                     // ->toggle()
@@ -114,6 +124,7 @@ class BooksTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                DeleteAction::make()
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

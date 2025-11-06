@@ -2,11 +2,17 @@
 
 namespace App\Filament\Admin\Resources\Books\Schemas;
 
+use Filament\Actions\Action;
 use Filament\Schemas\Schema;
+use Filament\Support\Enums\Size;
+use Filament\Actions\ActionGroup;
+use Filament\Support\Enums\Width;
+use Illuminate\Support\Facades\Log;
 use Filament\Support\Icons\Heroicon;
 use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Tabs;
+use Filament\Support\Enums\Alignment;
 use Filament\Schemas\Components\Wizard;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
@@ -14,6 +20,7 @@ use Filament\Support\Enums\IconPosition;
 use Filament\Forms\Components\DatePicker;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Wizard\Step;
 
 class BookForm
@@ -23,11 +30,43 @@ class BookForm
         return $schema
             ->components([
 
+
+            ActionGroup::make([
+                Action::make('Say Hello')
+                    ->action(function () {
+                        redirect()->route('filament.admin.resources.users.index');
+                    }),
+    
+                Action::make('Say Hello Message')
+                    ->schema([
+                        TextInput::make('message'),
+                        TextEntry::make('text')
+                            ->state('Hello from text entry component'),
+                    ])
+                    ->action(function (array $data) {
+                        Log::info($data['message']);
+                    }),
+            ])
+            ->button()
+            ->label('Custom Action Group')
+            ->icon(Heroicon::Pencil)
+            ->iconPosition(IconPosition::After)
+            ->color('info')
+            // ->dropdown(false)
+            // ->dropdownPlacement('top-start')
+            // ->dropdownWidth(Width::SevenExtraLarge)
+            ->buttonGroup()
+            ,
+
+
+
+
+
+
                 TextInput::make('title')
                     ->placeholder('Book Title')
                     ->required()
                     ,
-
 
                 TextInput::make('isbn')
                     ->required()

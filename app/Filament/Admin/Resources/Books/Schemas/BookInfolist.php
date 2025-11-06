@@ -2,8 +2,10 @@
 
 namespace App\Filament\Admin\Resources\Books\Schemas;
 
-use Filament\Infolists\Components\TextEntry;
+use Filament\Actions\Action;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Facades\Log;
+use Filament\Infolists\Components\TextEntry;
 
 class BookInfolist
 {
@@ -11,6 +13,9 @@ class BookInfolist
     {
         return $schema
             ->components([
+
+                
+
                 TextEntry::make('title'),
                 TextEntry::make('isbn')
                     ->placeholder('-'),

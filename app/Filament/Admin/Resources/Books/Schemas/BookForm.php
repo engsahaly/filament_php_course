@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources\Books\Schemas;
 
 use Filament\Actions\Action;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\Size;
 use Filament\Actions\ActionGroup;
@@ -31,33 +32,35 @@ class BookForm
             ->components([
 
 
-            ActionGroup::make([
                 Action::make('Say Hello')
                     ->action(function () {
-                        redirect()->route('filament.admin.resources.users.index');
+                        Log::info('Say hello');
+                        Notification::make()
+                            ->title('logged successfully')
+                            // ->duration(3000)
+                            // ->seconds(2)
+                            ->persistent()
+                            ->color('success')
+                            ->icon(Heroicon::AcademicCap)
+                            ->iconColor('success')
+                            ->body('Your message has been logged successfully')
+                            ->actions([
+                                Action::make('Go to Google')
+                                    ->button()
+                                    ->color('primary')
+                                    ->url('https://google.com'),
+                            ])
+                            ->send();
                     }),
-    
-                Action::make('Say Hello Message')
-                    ->schema([
-                        TextInput::make('message'),
-                        TextEntry::make('text')
-                            ->state('Hello from text entry component'),
-                    ])
-                    ->action(function (array $data) {
-                        Log::info($data['message']);
-                    }),
-            ])
-            ->button()
-            ->label('Custom Action Group')
-            ->icon(Heroicon::Pencil)
-            ->iconPosition(IconPosition::After)
-            ->color('info')
-            // ->dropdown(false)
-            // ->dropdownPlacement('top-start')
-            // ->dropdownWidth(Width::SevenExtraLarge)
-            ->buttonGroup()
-            ,
 
+
+
+
+
+
+
+
+            
 
 
 

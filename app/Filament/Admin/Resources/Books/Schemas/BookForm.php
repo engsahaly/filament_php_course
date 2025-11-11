@@ -31,41 +31,6 @@ class BookForm
         return $schema
             ->components([
 
-
-                Action::make('Say Hello')
-                    ->action(function () {
-                        Log::info('Say hello');
-                        Notification::make()
-                            ->title('logged successfully')
-                            // ->duration(3000)
-                            // ->seconds(2)
-                            ->persistent()
-                            ->color('success')
-                            ->icon(Heroicon::AcademicCap)
-                            ->iconColor('success')
-                            ->body('Your message has been logged successfully')
-                            ->actions([
-                                Action::make('Go to Google')
-                                    ->button()
-                                    ->color('primary')
-                                    ->url('https://google.com'),
-                            ])
-                            ->send();
-                    }),
-
-
-
-
-
-
-
-
-            
-
-
-
-
-
                 TextInput::make('title')
                     ->placeholder('Book Title')
                     ->required()
@@ -98,7 +63,6 @@ class BookForm
                     ->numeric()
                     ->rules(['min:0']),
 
-            
                 
             ]);
     }

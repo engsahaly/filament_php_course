@@ -30,58 +30,24 @@ class BooksTable
         return $table
             ->columns([
                 
-
-
-
-
                 TextColumn::make('title')
                     ->label('Book Title')
-                    // ->default('-')
-                    // ->placeholder('Placeholder Example')
                     ->searchable()
-                    ->toggleable()
-                    // ->sortable()
-                    // ->url('https://www.google.com')
-                    // ->openUrlInNewTab()
-                    // ->tooltip('gggg')
-                    // ->disabledClick()
-                    // ->alignStart()
-                    // ->alignCenter()
-                    // ->alignEnd()
-                    // ->verticallyAlignStart()
-                    // ->verticallyAlignCenter()
-                    // ->verticallyAlignEnd()
-                    // ->visible(false)
-                    // ->width('50%')
-                    // ->badge()
-                    // ->color('success')
-                    // ->extraHeaderAttributes(['style' => 'background-color: #d74e4eff'])
-                    // ->extraCellAttributes(['style' => 'background-color: #40cc34ff'])
                     ,
-
-                // TextColumn::make('status'),
-                // SelectColumn::make('status')
-                //     ->options([
-                //         'available' => 'available',
-                //         'unavailable' => 'unavailable',
-                //     ]),
-
-
-
-                // TextColumn::make('isbn')
-                //     ->searchable(),
-                // TextColumn::make('published_year')
-                //     ->date()
-                //     ->sortable(),
-                // TextColumn::make('total_copies')
-                //     ->numeric()
-                //     ->sortable(),
-                // TextColumn::make('available_copies')
-                //     ->numeric()
-                //     ->sortable(),
-                // TextColumn::make('author_id')
-                //     ->numeric()
-                //     ->sortable(),
+                TextColumn::make('isbn')
+                    ->searchable(),
+                TextColumn::make('published_year')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('total_copies')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('available_copies')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('author.name')
+                    ->label('Book Author')
+                    ->sortable(),
                 // TextColumn::make('created_at')
                 //     ->dateTime()
                 //     ->sortable()

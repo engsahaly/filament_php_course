@@ -15,11 +15,11 @@ class BorrowingsTable
     {
         return $table
             ->columns([
-                TextColumn::make('borrower_id')
-                    ->numeric()
+                TextColumn::make('borrower.name')
+                    ->label('Borrower Name')
                     ->sortable(),
-                TextColumn::make('book_id')
-                    ->numeric()
+                TextColumn::make('book.title')
+                    ->label('Book Title')
                     ->sortable(),
                 TextColumn::make('borrowed_at')
                     ->dateTime()

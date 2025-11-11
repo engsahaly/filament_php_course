@@ -14,8 +14,6 @@ class BookInfolist
         return $schema
             ->components([
 
-                
-
                 TextEntry::make('title'),
                 TextEntry::make('isbn')
                     ->placeholder('-'),
@@ -26,8 +24,8 @@ class BookInfolist
                     ->numeric(),
                 TextEntry::make('available_copies')
                     ->numeric(),
-                TextEntry::make('author_id')
-                    ->numeric()
+                TextEntry::make('author.name')
+                    ->label('Author Name')
                     ->placeholder('-'),
                 TextEntry::make('created_at')
                     ->dateTime()

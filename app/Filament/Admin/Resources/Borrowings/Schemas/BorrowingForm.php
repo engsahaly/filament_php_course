@@ -40,8 +40,10 @@ class BorrowingForm
                             
                         Select::make('book_id')
                             ->label('Book')
-                            ->relationship('book', 'title', function (Builder $query) {
-                                return $query->where('status', 'available');
+                            ->relationship('book', 'title', function (Builder $query, string $operation) {
+                                if ($operation == 'create') {
+                                    return $query->where('status', 'available');
+                                }
                             })
                             ->required()
                             ->searchable(['title', 'isbn'])

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\Books;
 
+use App\Filament\Admin\Resources\Books\Widgets\TotalBooksWidget;
 use UnitEnum;
 use BackedEnum;
 use App\Models\Book;
@@ -101,7 +102,12 @@ class BookResource extends Resource
 
     protected static int $globalSearchResultsLimit = 1;
 
-
+    public static function getWidgets(): array
+    {
+        return [
+            TotalBooksWidget::class,
+        ];
+    }
 
 
 

@@ -6,9 +6,12 @@ use UnitEnum;
 use BackedEnum;
 use App\Models\Book;
 use Filament\Tables\Table;
+use Filament\Actions\Action;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Support\Htmlable;
 use App\Filament\Admin\Resources\Books\Pages\EditBook;
 use App\Filament\Admin\Resources\Books\Pages\ViewBook;
 use App\Filament\Admin\Resources\Books\Pages\ListBooks;
@@ -63,4 +66,43 @@ class BookResource extends Resource
             'edit' => EditBook::route('/{record}/edit'),
         ];
     }
+
+    public static function getGlobalSearchResultTitle(Model $record): string | Htmlable
+    {
+        return $record->title . ' | ' . $record->isbn;
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['title', 'isbn'];
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        return [
+            'Available Copies' => $record->available_copies,
+            'Total Copies' => $record->total_copies,
+        ];
+    }
+
+    public static function getGlobalSearchResultUrl(Model $record): string
+    {
+        return BookResource::getUrl('index');
+    }
+
+    public static function getGlobalSearchResultActions(Model $record): array
+    {
+        return [
+            Action::make('Go To Google')
+                ->url('https://www.google.com')
+                ->button(),
+        ];
+    }
+
+    protected static int $globalSearchResultsLimit = 1;
+
+
+
+
+
 }

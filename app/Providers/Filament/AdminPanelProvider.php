@@ -74,8 +74,18 @@ class AdminPanelProvider extends PanelProvider
                     ->label('Administration'),
             ])
             ->resourceCreatePageRedirect('index')
+            // ->globalSearch(false)
+            // ->globalSearchKeyBindings(['ctrl+q'])
             ;
     }
+
+
+
+
+
+
+
+
 
 
 

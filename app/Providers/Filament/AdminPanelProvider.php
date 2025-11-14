@@ -5,8 +5,12 @@ namespace App\Providers\Filament;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Pages\Dashboard;
+use Filament\Auth\Pages\Login;
 use Filament\Support\Colors\Color;
+use App\Filament\Pages\MyLoginPage;
 use Filament\Widgets\AccountWidget;
+use Filament\Auth\Pages\EditProfile;
+use App\Filament\Pages\MyEditProfile;
 use Illuminate\Support\Facades\Blade;
 use App\Filament\Widgets\MyCustomWidget;
 use Filament\Navigation\NavigationGroup;
@@ -33,7 +37,9 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(MyLoginPage::class)
+            ->authGuard('admin')
+            ->registration()
             ->colors([
                 'primary' => Color::Red,
             ])
@@ -61,7 +67,7 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->profile()
+            ->profile(MyEditProfile::class)
             ->simpleProfilePage(false)
             ->brandLogo(asset('images/book.png'))
             ->brandLogoHeight('3rem')
